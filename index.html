@@ -94,6 +94,21 @@
         .btn:hover { background-color: #00ccaa; }
         .back-btn { background-color: #444; color: white; margin-bottom: 15px; display: none;}
         .back-btn:hover { background-color: #555; }
+        
+        /* Direct secondary action layout button style */
+        .direct-fullscreen-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 0 0 12px 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .direct-fullscreen-btn:hover { background-color: #dd2255; }
     </style>
 </head>
 <body>
@@ -123,6 +138,10 @@
     <!-- Active Dedicated Window Core Viewport -->
     <div id="game-container">
         <iframe id="game-frame" src="" allow="gamepad *; keyboard *; mouse *; fullscreen *" scrolling="no"></iframe>
+        
+        <!-- NEW BUTTON: Placed right beneath the game view viewport -->
+        <button class="direct-fullscreen-btn" onclick="toggleNativeFullscreen()">⚡ ACTIVATE FULLSCREEN MODE ⚡</button>
+        
         <div class="controls">
             <span id="current-game-title" style="font-weight: bold; color: #00ffcc;">Game Loading...</span>
             <button class="btn" onclick="toggleNativeFullscreen()">🗖 Go Fullscreen</button>
