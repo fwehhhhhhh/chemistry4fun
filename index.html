@@ -5,221 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background-color: #0b0b0c; 
-            color: white; 
-            margin: 0; 
-            padding: 20px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #0b0b0c; color: white; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         h1 { margin-bottom: 30px; font-weight: 600; letter-spacing: 1px;}
-        
-        /* Grid Layout for initial menu view */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 25px; 
-            width: 100%;
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        
-        /* Clickable game card style */
-        .card { 
-            background-color: #16161a; 
-            border-radius: 12px; 
-            padding: 12px; 
-            text-align: center; 
-            cursor: pointer; 
-            transition: transform 0.2s, box-shadow 0.2s; 
-            border: 1px solid #24242b;
-        }
-        .card:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 8px 24px rgba(0, 255, 204, 0.25);
-            border-color: #00ffcc;
-        }
-        .card img { 
-            width: 100%; 
-            height: 280px;
-            object-fit: cover;
-            border-radius: 8px; 
-            background-color: #010101;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; margin: 0 auto; }
+        .card { background-color: #16161a; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #24242b; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0, 255, 204, 0.25); border-color: #00ffcc; }
+        .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; background-color: #010101; }
         .card h3 { margin: 12px 0 3px 0; font-size: 1.05rem; font-weight: 600; color: #f0f0f0; }
-
-        /* Unified wrapper to control full layout structure */
-        #game-wrapper {
-            display: none;
-            width: 95vw;
-            max-width: 1300px;
-            flex-direction: column;
-        }
-
-        #game-container {
-            width: 100%;
-            height: 78vh;
-            background-color: #000;
-            border-radius: 12px 12px 0 0;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-            border: 1px solid #333;
-            border-bottom: none;
-        }
-        #game-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Control Panel bar below active game */
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 12px 20px;
-            background-color: #121214;
-            box-sizing: border-box;
-            border: 1px solid #333;
-            border-top: none;
-            border-radius: 0 0 12px 12px;
-        }
-        .btn {
-            background-color: #00ffcc;
-            color: #121212;
-            border: none;
-            padding: 10px 24px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+        #game-wrapper { display: none; width: 95vw; max-width: 1300px; flex-direction: column; }
+        #game-container { width: 100%; height: 78vh; background-color: #000; border-radius: 12px 12px 0 0; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 1px solid #333; border-bottom: none; }
+        #game-frame { width: 100%; height: 100%; border: none; }
+        .controls { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px 20px; background-color: #121214; box-sizing: border-box; border: 1px solid #333; border-top: none; border-radius: 0 0 12px 12px; }
+        .btn { background-color: #00ffcc; color: #121212; border: none; padding: 10px 24px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
         .btn:hover { background-color: #00ccaa; }
-        .back-btn { background-color: #2a2a30; color: white; margin-bottom: 20px; display: none;}
+        .back-btn { background-color: #2a2a30; color: white; margin-bottom: 20px; display: none; }
         .back-btn:hover { background-color: #3f3f46; }
-        
-        /* Direct persistent layout button below the running game */
-        .direct-fullscreen-btn {
-            width: 100%;
-            padding: 16px;
-            font-size: 1.1rem;
-            background-color: #ff3366;
-            color: white;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border-left: 1px solid #333;
-            border-right: 1px solid #333;
-            box-sizing: border-box;
-            transition: background 0.2s;
-        }
+        .direct-fullscreen-btn { width: 100%; padding: 16px; font-size: 1.1rem; background-color: #ff3366; color: white; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; border-left: 1px solid #333; border-right: 1px solid #333; box-sizing: border-box; transition: background 0.2s; }
         .direct-fullscreen-btn:hover { background-color: #dd2255; }
-
-        /* FULLSCREEN STATE IMPLEMENTATION - Overrides browser view settings dynamically */
-        :fullscreen #game-wrapper {
-            width: 100vw !important;
-            max-width: 100vw !important;
-            height: 100vh !important;
-        }
-        :fullscreen #game-container {
-            height: 100vh !important;
-            border: none !important;
-            border-radius: 0 !important;
-        }
-        /* Hides control interfaces automatically during active fullscreen states */
-        :fullscreen .direct-fullscreen-btn, :fullscreen .controls {
-            display: none !important;
-        }
+        :fullscreen #game-wrapper { width: 100vw !important; max-width: 100vw !important; height: 100vh !important; }
+        :fullscreen #game-container { height: 100vh !important; border: none !important; border-radius: 0 !important; }
+        :fullscreen .direct-fullscreen-btn, :fullscreen .controls { display: none !important; }
     </style>
 </head>
 <body>
 
     <h1 id="page-title">Project Dashboard</h1>
 
-    <!-- Library navigation back trigger -->
     <button class="btn back-btn" id="back-button" onclick="closeGame()">← Back to Library</button>
 
-    <!-- Menu Selection View Grid -->
     <div class="grid" id="game-grid">
-
-        <!-- Bloxd.io Card -->
         <div class="card" onclick="loadGame('https://math.wales', 'Bloxd.io')">
             <img src="https://crazygames.com" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
-
-        <!-- FNAF 1 (Swapped to raw rawg-cdn server endpoint) -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s')">
+        <div class="card" onclick="loadGame('https://googleusercontent.com', 'Five Nights at Freddy\'s')">
             <img src="https://media-amazon.com" alt="FNAF 1">
             <h3>FNAF 1</h3>
         </div>
-
-        <!-- FNAF 2 (Swapped to direct active mirror frame) -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s 2')">
+        <div class="card" onclick="loadGame('https://googleusercontent.com', 'Five Nights at Freddy\'s 2')">
             <img src="https://media-amazon.com" alt="FNAF 2">
             <h3>FNAF 2</h3>
         </div>
-
-        <!-- FNAF 3 (Swapped to raw package mirror) -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s 3')">
+        <div class="card" onclick="loadGame('https://googleusercontent.com', 'Five Nights at Freddy\'s 3')">
             <img src="https://media-amazon.com" alt="FNAF 3">
             <h3>FNAF 3</h3>
         </div>
-
-        <!-- FNAF 4 (Swapped to clean asset repository) -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s 4')">
+        <div class="card" onclick="loadGame('https://googleusercontent.com', 'Five Nights at Freddy\'s 4')">
             <img src="https://media-amazon.com" alt="FNAF 4">
             <h3>FNAF 4</h3>
         </div>
-
-        <!-- FNAF 5: Sister Location (Bypasses web.mit.edu completely via raw web port) -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s: Sister Location')">
+        <div class="card" onclick="loadGame('https://googleusercontent.com', 'Five Nights at Freddy\'s: Sister Location')">
             <img src="https://media-amazon.com" alt="FNAF 5">
             <h3>FNAF 5: Sister Location</h3>
         </div>
-
-        <!-- FNAF 6: Pizzeria Simulator (Fixed Invalid TurboWarp URL using fully compiled package stream) -->
-        <div class="card" onclick="loadGame('https://github.io', 'Freddy Fazbear\'s Pizzeria Simulator')">
+        <div class="card" onclick="loadGame('https://googleusercontent.com', 'Freddy Fazbear\'s Pizzeria Simulator')">
             <img src="https://media-amazon.com" alt="FNAF 6">
             <h3>FNAF 6: Pizzeria Sim</h3>
         </div>
-
-        <!-- Ultimate Custom Night (Swapped to verified fallback unblocked source link) -->
-        <div class="card" onclick="loadGame('https://github.io', 'Ultimate Custom Night')">
+        <div class="card" onclick="loadGame('https://googleusercontent.com', 'Ultimate Custom Night')">
             <img src="https://media-amazon.com" alt="UCN">
             <h3>Ultimate Custom Night</h3>
         </div>
-
     </div>
 
-    <!-- Wrapper structure to coordinate scaling mechanics -->
     <div id="game-wrapper">
-        <div id="game-container">
-            <iframe id="game-frame" src="" allow="gamepad *; keyboard *; mouse *; fullscreen *" scrolling="no"></iframe>
-        </div>
-        
-        <!-- Dedicated Action Row Button directly beneath the frame layout -->
+        <div id="game-container"><iframe id="game-frame" src="" allow="gamepad *; keyboard *; mouse *; fullscreen *" scrolling="no"></iframe></div>
         <button class="direct-fullscreen-btn" onclick="toggleNativeFullscreen()">⚡ ACTIVATE FULLSCREEN MODE ⚡</button>
-        
         <div class="controls">
             <span id="current-game-title" style="font-weight: bold; color: #00ffcc;">Game Loading...</span>
             <button class="btn" onclick="toggleNativeFullscreen()">🗖 Go Fullscreen</button>
         </div>
     </div>
 
-    <!-- COMPRESSED SCRIPT CONTAINER: Guaranteed to stay inside the code block -->
     <script>
         const grid = document.getElementById('game-grid'), wrapper = document.getElementById('game-wrapper'), frame = document.getElementById('game-frame'), backBtn = document.getElementById('back-button'), titleText = document.getElementById('current-game-title'), mainTitle = document.getElementById('page-title');
-        function loadGame(url, name) { grid.style.display = 'none'; mainTitle.style.display = 'none'; wrapper.style.display = 'flex'; backBtn.style.display = 'block'; titleText.textContent = name; frame.src = url; frame.focus(); }
+        function loadGame(url, name) { grid.style.display = 'none'; mainTitle.style.display = 'none'; wrapper.style.display = 'flex'; backBtn.style.display = 'block'; titleText.textContent = name; frame.src = url; setTimeout(() => { frame.focus(); }, 100); }
         function closeGame() { if (document.fullscreenElement) { document.exitFullscreen(); } frame.src = ""; wrapper.style.display = 'none'; backBtn.style.display = 'none'; grid.style.width = '100%'; grid.style.display = 'grid'; mainTitle.style.display = 'block'; }
-        function toggleNativeFullscreen() { if (!document.fullscreenElement) { wrapper.requestFullscreen().catch(err => { alert(`Error: ${err.message}`); }); } else { document.exitFullscreen(); } }
+        function toggleNativeFullscreen() { if (!document.fullscreenElement) { wrapper.requestFullscreen().catch(err => { alert("Fullscreen blocked: " + err.message); }); } else { document.exitFullscreen(); } }
         document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) { frame.focus(); } });
     </script>
 
