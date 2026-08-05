@@ -20,10 +20,10 @@
         /* Grid Layout for initial menu view */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 25px; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 20px; 
             width: 100%;
-            max-width: 1000px; 
+            max-width: 1100px; 
             margin: 0 auto; 
         }
         
@@ -31,7 +31,7 @@
         .card { 
             background-color: #1e1e1e; 
             border-radius: 12px; 
-            padding: 15px; 
+            padding: 12px; 
             text-align: center; 
             cursor: pointer; 
             transition: transform 0.2s, box-shadow 0.2s; 
@@ -44,12 +44,12 @@
         }
         .card img { 
             width: 100%; 
-            height: 140px;
+            height: 130px;
             object-fit: cover;
             border-radius: 8px; 
             background-color: #111;
         }
-        .card h3 { margin: 12px 0 5px 0; font-size: 1.1rem; }
+        .card h3 { margin: 10px 0 3px 0; font-size: 1rem; }
 
         /* Unified wrapper to control full layout structure */
         #game-wrapper {
@@ -124,7 +124,7 @@
         }
         .direct-fullscreen-btn:hover { background-color: #dd2255; }
 
-        /* NATIVE FULLSCREEN STATE CLASSES - Forces game elements to expand completely */
+        /* NATIVE FULLSCREEN STATE CLASSES - Forces elements to scale completely */
         :-webkit-full-screen #game-wrapper, :fullscreen #game-wrapper {
             width: 100vw !important;
             max-width: 100vw !important;
@@ -133,7 +133,7 @@
             margin: 0;
         }
         :-webkit-full-screen #game-container, :fullscreen #game-container {
-            height: calc(100vh - 100px) !important; /* Leaves room for buttons below */
+            height: calc(100vh - 100px) !important;
             border-radius: 0 !important;
             border: none !important;
         }
@@ -151,48 +151,48 @@
 
         <!-- Bloxd.io Card -->
         <div class="card" onclick="loadGame('https://math.wales', 'Bloxd.io')">
-            <img src="https://unsplash.com" alt="Bloxd.io">
+            <img src="https://crazygames.com" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
 
         <!-- FNAF 1 -->
-        <div class="card" onclick="loadGame('https://workers.dev', 'Five Nights at Freddy\'s 1')">
+        <div class="card" onclick="loadGame('https://sussygamedeveloper.github.io/FNAF1/', 'FNAF 1')">
             <img src="https://unsplash.com" alt="FNAF 1">
             <h3>FNAF 1</h3>
         </div>
 
         <!-- FNAF 2 -->
-        <div class="card" onclick="loadGame('https://workers.dev', 'Five Nights at Freddy\'s 2')">
+        <div class="card" onclick="loadGame('https://sussygamedeveloper.github.io/FiveNights2NOHACKS/', 'FNAF 2')">
             <img src="https://unsplash.com" alt="FNAF 2">
             <h3>FNAF 2</h3>
         </div>
 
         <!-- FNAF 3 -->
-        <div class="card" onclick="loadGame('https://workers.dev', 'Five Nights at Freddy\'s 3')">
+        <div class="card" onclick="loadGame('https://sussygamedeveloper.github.io/fnaf3/', 'FNAF 3')">
             <img src="https://unsplash.com" alt="FNAF 3">
             <h3>FNAF 3</h3>
         </div>
 
         <!-- FNAF 4 -->
-        <div class="card" onclick="loadGame('https://workers.dev', 'Five Nights at Freddy\'s 4')">
+        <div class="card" onclick="loadGame('https://abc6782.github.io/game-indexes/fnaf4.html', 'FNAF 4')">
             <img src="https://unsplash.com" alt="FNAF 4">
             <h3>FNAF 4</h3>
         </div>
 
         <!-- FNAF 5: Sister Location -->
-        <div class="card" onclick="loadGame('https://workers.dev', 'Five Nights at Freddy\'s: Sister Location')">
+        <div class="card" onclick="loadGame('https://mit.edu', 'FNAF 5: Sister Location')">
             <img src="https://unsplash.com" alt="FNAF 5">
-            <h3>FNAF 5 (SL)</h3>
+            <h3>FNAF 5: Sister Location</h3>
         </div>
 
         <!-- FNAF 6: Pizzeria Simulator -->
-        <div class="card" onclick="loadGame('https://workers.dev', 'Freddy Fazbear\'s Pizzeria Simulator')">
+        <div class="card" onclick="loadGame('https://turbowarp.org', 'FNAF 6: Pizzeria Simulator')">
             <img src="https://unsplash.com" alt="FNAF 6">
-            <h3>FNAF 6 (FFPS)</h3>
+            <h3>FNAF 6: Pizzeria Sim</h3>
         </div>
 
         <!-- Ultimate Custom Night -->
-        <div class="card" onclick="loadGame('https://workers.dev', 'Ultimate Custom Night')">
+        <div class="card" onclick="loadGame('https://sussygamedeveloper.github.io/UCN-HTML5/', 'Ultimate Custom Night')">
             <img src="https://unsplash.com" alt="UCN">
             <h3>Ultimate Custom Night</h3>
         </div>
@@ -252,7 +252,6 @@
         // Activates hardware display matching across the system window document layout
         function toggleNativeFullscreen() {
             if (!document.fullscreenElement) {
-                // Target the highest document container element to force whole screen scaling
                 document.documentElement.requestFullscreen().catch(err => {
                     alert(`Error attempting to enable full-screen mode: ${err.message}`);
                 });
@@ -263,3 +262,5 @@
 
         // Listen for screen state triggers to auto-focus keyboard layout bindings inside the game viewport
         document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                frame.focus();
