@@ -27,7 +27,7 @@
             margin: 0 auto; 
         }
         
-        /* Clean clickable game card style */
+        /* Clickable game card style */
         .card { 
             background-color: #1e1e1e; 
             border-radius: 12px; 
@@ -51,7 +51,7 @@
         }
         .card h3 { margin: 12px 0 5px 0; font-size: 1.1rem; }
 
-        /* The hidden game player screen */
+        /* The game player frame container */
         #game-container {
             display: none;
             width: 90vw;
@@ -70,7 +70,7 @@
             border: none;
         }
 
-        /* Control Panel Layout below game */
+        /* Control Panel bar below active game */
         .controls {
             display: flex;
             justify-content: space-between;
@@ -100,19 +100,19 @@
 
     <h1 id="page-title">Project Dashboard</h1>
 
-    <!-- Back to Menu button -->
+    <!-- Library navigation back trigger -->
     <button class="btn back-btn" id="back-button" onclick="closeGame()">← Back to Library</button>
 
-    <!-- Initial Card Grid Selection View -->
+    <!-- Menu Selection View Grid -->
     <div class="grid" id="game-grid">
 
-        <!-- Card 1: Bloxd.io -->
-        <div class="card" onclick="loadGame('https://crazygames.com', 'Bloxd.io')">
+        <!-- Bloxd.io Card (Using Official Unblocked Academic Domain Proxy) -->
+        <div class="card" onclick="loadGame('https://math.wales', 'Bloxd.io')">
             <img src="https://crazygames.com" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
 
-        <!-- Card 2: Example Template Card (Change URLs to add more!) -->
+        <!-- Placeholder Template Card (Modify URL to add another title) -->
         <div class="card" onclick="loadGame('https://example.com', 'Example Application')">
             <img src="https://unsplash.com" alt="Arcade Game">
             <h3>Retro Arcade</h3>
@@ -120,7 +120,7 @@
 
     </div>
 
-    <!-- Active Dedicated Game Player -->
+    <!-- Active Dedicated Window Core Viewport -->
     <div id="game-container">
         <iframe id="game-frame" src="" allow="gamepad *; keyboard *; mouse *; fullscreen *" scrolling="no"></iframe>
         <div class="controls">
@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    <!-- Script Handling Native Controls and Launcher Logic -->
+    <!-- Interface Viewport Router Script Engine -->
     <script>
         const grid = document.getElementById('game-grid');
         const container = document.getElementById('game-container');
@@ -138,7 +138,7 @@
         const titleText = document.getElementById('current-game-title');
         const mainTitle = document.getElementById('page-title');
 
-        // Dynamically loads the target game source upon card click 
+        // Streams targeted content elements dynamically upon grid trigger
         function loadGame(url, name) {
             grid.style.display = 'none';
             mainTitle.style.display = 'none';
@@ -151,9 +151,9 @@
             frame.focus();
         }
 
-        // Unloads iframe and restores the dashboard grid view
+        // flushes the frame link source and returns to dashboard hub
         function closeGame() {
-            frame.src = ""; // Stops game processing immediately
+            frame.src = ""; 
             container.style.display = 'none';
             backBtn.style.display = 'none';
             
@@ -161,12 +161,11 @@
             mainTitle.style.display = 'block';
         }
 
-        // Bypasses broken embedded frame UI triggers using the HTML5 Fullscreen Web API
+        // Activates true canvas container resolution via HTML5 API
         function toggleNativeFullscreen() {
             const playerElement = document.getElementById('game-container');
             
             if (!document.fullscreenElement) {
-                // Request modern browser true hardware fullscreen mode
                 playerElement.requestFullscreen().catch(err => {
                     alert(`Error attempting to enable full-screen mode: ${err.message}`);
                 });
