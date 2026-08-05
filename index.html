@@ -6,60 +6,175 @@
     <title>My Portfolio</title>
     <style>
         body { 
-            font-family: Arial, sans-serif; 
-            background-color: #1a1a1a; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: #121212; 
             color: white; 
             margin: 0; 
             padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        h1 { text-align: center; }
+        h1 { margin-bottom: 30px; font-weight: 600; letter-spacing: 1px;}
+        
+        /* Grid Layout for initial menu view */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-            gap: 20px; 
-            max-width: 1200px; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 25px; 
+            width: 100%;
+            max-width: 1000px; 
             margin: 0 auto; 
         }
+        
+        /* Clean clickable game card style */
         .card { 
-            background-color: #2a2a2a; 
-            border-radius: 8px; 
+            background-color: #1e1e1e; 
+            border-radius: 12px; 
             padding: 15px; 
             text-align: center; 
             cursor: pointer; 
-            transition: 0.2s; 
+            transition: transform 0.2s, box-shadow 0.2s; 
+            border: 1px solid #2d2d2d;
         }
-        .card:hover { transform: scale(1.05); background-color: #3a3a3a; }
-        .card img { width: 100%; border-radius: 4px; }
-        .game-link { color: #00ffcc; text-decoration: none; font-weight: bold; display: block; margin-top: 10px; }
+        .card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 20px rgba(0, 255, 204, 0.2);
+            border-color: #00ffcc;
+        }
+        .card img { 
+            width: 100%; 
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px; 
+            background-color: #111;
+        }
+        .card h3 { margin: 12px 0 5px 0; font-size: 1.1rem; }
+
+        /* The hidden game player screen */
+        #game-container {
+            display: none;
+            width: 90vw;
+            max-width: 1100px;
+            height: 70vh;
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+        #game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Control Panel Layout below game */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #1a1a1a;
+            box-sizing: border-box;
+            border-top: 1px solid #333;
+        }
+        .btn {
+            background-color: #00ffcc;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover { background-color: #00ccaa; }
+        .back-btn { background-color: #444; color: white; margin-bottom: 15px; display: none;}
+        .back-btn:hover { background-color: #555; }
     </style>
 </head>
 <body>
 
-    <h1>Project Dashboard</h1>
+    <h1 id="page-title">Project Dashboard</h1>
 
-    <div class="grid">
+    <!-- Back to Menu button -->
+    <button class="btn back-btn" id="back-button" onclick="closeGame()">← Back to Library</button>
 
-        <!-- Game Card 1: Retro Arcade -->
-        <div class="card">
+    <!-- Initial Card Grid Selection View -->
+    <div class="grid" id="game-grid">
+
+        <!-- Card 1: Bloxd.io -->
+        <div class="card" onclick="loadGame('https://crazygames.com', 'Bloxd.io')">
+            <img src="https://crazygames.com" alt="Bloxd.io">
+            <h3>Bloxd.io</h3>
+        </div>
+
+        <!-- Card 2: Example Template Card (Change URLs to add more!) -->
+        <div class="card" onclick="loadGame('https://example.com', 'Example Application')">
+            <img src="https://unsplash.com" alt="Arcade Game">
             <h3>Retro Arcade</h3>
-            <a class="game-link" href="https://example.com">Play Game</a> 
-        </div> <!-- Closing tag added here to isolate this card -->
-
-        <!-- Game Card 2: Bloxd.io (Moved outside of Card 1) -->
-        <div class="card" style="grid-column: span 2; background-color: #111;">
-            <h3>Bloxd.io (Unblocked Proxy Link)</h3>
-            <iframe 
-                src="https://www.crazygames.com/embed/bloxdhop-io" 
-                width="100%" 
-                height="500px" 
-                frameborder="0" 
-                allow="gamepad *; keyboard *; mouse *" 
-                scrolling="no" 
-                style="border:none; border-radius: 4px;">
-            </iframe>
         </div>
 
     </div>
+
+    <!-- Active Dedicated Game Player -->
+    <div id="game-container">
+        <iframe id="game-frame" src="" allow="gamepad *; keyboard *; mouse *; fullscreen *" scrolling="no"></iframe>
+        <div class="controls">
+            <span id="current-game-title" style="font-weight: bold; color: #00ffcc;">Game Loading...</span>
+            <button class="btn" onclick="toggleNativeFullscreen()">🗖 Go Fullscreen</button>
+        </div>
+    </div>
+
+    <!-- Script Handling Native Controls and Launcher Logic -->
+    <script>
+        const grid = document.getElementById('game-grid');
+        const container = document.getElementById('game-container');
+        const frame = document.getElementById('game-frame');
+        const backBtn = document.getElementById('back-button');
+        const titleText = document.getElementById('current-game-title');
+        const mainTitle = document.getElementById('page-title');
+
+        // Dynamically loads the target game source upon card click 
+        function loadGame(url, name) {
+            grid.style.display = 'none';
+            mainTitle.style.display = 'none';
+            
+            container.style.display = 'block';
+            backBtn.style.display = 'block';
+            
+            titleText.textContent = name;
+            frame.src = url;
+            frame.focus();
+        }
+
+        // Unloads iframe and restores the dashboard grid view
+        function closeGame() {
+            frame.src = ""; // Stops game processing immediately
+            container.style.display = 'none';
+            backBtn.style.display = 'none';
+            
+            grid.style.display = 'grid';
+            mainTitle.style.display = 'block';
+        }
+
+        // Bypasses broken embedded frame UI triggers using the HTML5 Fullscreen Web API
+        function toggleNativeFullscreen() {
+            const playerElement = document.getElementById('game-container');
+            
+            if (!document.fullscreenElement) {
+                // Request modern browser true hardware fullscreen mode
+                playerElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
 
 </body>
 </html>
