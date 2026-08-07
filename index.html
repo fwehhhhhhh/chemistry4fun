@@ -99,7 +99,7 @@
     <!-- Upper-right profile credit node -->
     <div class="credit-tag">Made by halo4goat</div>
 
-    <!-- Main Header Rebranded with proper casing -->
+    <!-- Main Header -->
     <h1 id="page-title">Chemistry4Fun</h1>
 
     <button class="btn back-btn" id="back-button" onclick="closeGame()">← Back to Library</button>
@@ -111,9 +111,9 @@
             <h3>Bloxd.io</h3>
         </div>
         
-        <!-- Orbit Beats Card (Linked to unblocked standalone gameplay application core) -->
-        <div class="card" onclick="loadGame('https://zapgames.io/orbit-beats', 'Orbit Beats')">
-            <img src="https://zapgames.io/orbit-beats" alt="Orbit Beats">
+        <!-- Orbit Beats Card (Linked directly to zapgames.io backend game engine) -->
+        <div class="card" onclick="loadGame('https://zapgames.io', 'Orbit Beats')">
+            <img src="https://gamedistribution.com" alt="Orbit Beats">
             <h3>Orbit Beats</h3>
         </div>
     </div>
@@ -127,7 +127,7 @@
         </div>
     </div>
 
-    <!-- COMPRESSED REACTION ROUTER SCRIPT CORE -->
+    <!-- REACTION ROUTER SCRIPT CORE -->
     <script>
         const grid = document.getElementById('game-grid'), wrapper = document.getElementById('game-wrapper'), frame = document.getElementById('game-frame'), backBtn = document.getElementById('back-button'), titleText = document.getElementById('current-game-title'), mainTitle = document.getElementById('page-title');
         function loadGame(url, name) { grid.style.display = 'none'; mainTitle.style.display = 'none'; wrapper.style.display = 'flex'; backBtn.style.display = 'block'; titleText.textContent = name; frame.src = url; setTimeout(() => { frame.focus(); }, 100); }
