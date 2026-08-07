@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Changes the browser tab text name -->
-    <title>chemistry4fun</title>
+    <!-- Tab title with customized capitalization -->
+    <title>Chemistry4Fun</title>
     
-    <!-- Embedded Custom SVG: A beaker filled with bubbling purple liquid -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 64 64'><path d='M42,6H22V10H26V24L10,54a4,4,0,0,0,4,4H50a4,4,0,0,0,4-4L38,24V10h4Z' fill='none' stroke='%2300ffcc' stroke-width='4' stroke-linejoin='round'/><path d='M14,52L24,32H40L50,52Z' fill='%239933ff'/><circle cx='28' cy='44' r='3' fill='%23ffffff' opacity='0.7'/><circle cx='36' cy='38' r='2' fill='%23ffffff' opacity='0.7'/><circle cx='26' cy='24' r='2' fill='%239933ff'/><circle cx='38' cy='20' r='2.5' fill='%239933ff'/><circle cx='31' cy='14' r='1.5' fill='%239933ff'/></svg>">
+    <!-- Tab icon configured using the test tube emoji vector framework -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧪</text></svg>">
 
     <style>
         body { 
@@ -23,7 +23,7 @@
             position: relative;
         }
         
-        /* Custom text placement in the top right corner */
+        /* Profile attribution block in upper-right lane */
         .credit-tag {
             position: absolute;
             top: 20px;
@@ -40,7 +40,7 @@
         
         h1 { margin-bottom: 30px; font-weight: 600; letter-spacing: 1px;}
         
-        /* Grid layout structure for initial page selection */
+        /* Grid boundaries for active dashboard selections */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
@@ -50,7 +50,7 @@
             margin: 0 auto; 
         }
         
-        /* Clickable game card style */
+        /* Interactive element card block styling */
         .card { 
             background-color: #16161a; 
             border-radius: 12px; 
@@ -74,7 +74,7 @@
         }
         .card h3 { margin: 12px 0 3px 0; font-size: 1.05rem; font-weight: 600; color: #f0f0f0; }
         
-        /* Game frame container layouts */
+        /* Main application player containment fields */
         #game-wrapper { display: none; width: 95vw; max-width: 1300px; flex-direction: column; }
         #game-container { width: 100%; height: 78vh; background-color: #000; border-radius: 12px 12px 0 0; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 1px solid #333; border-bottom: none; }
         #game-frame { width: 100%; height: 100%; border: none; }
@@ -88,7 +88,7 @@
         .direct-fullscreen-btn { width: 100%; padding: 16px; font-size: 1.1rem; background-color: #ff3366; color: white; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; border-left: 1px solid #333; border-right: 1px solid #333; box-sizing: border-box; transition: background 0.2s; }
         .direct-fullscreen-btn:hover { background-color: #dd2255; }
         
-        /* Fullscreen operational status configurations */
+        /* Fullscreen responsive formatting boundaries */
         :fullscreen #game-wrapper { width: 100vw !important; max-width: 100vw !important; height: 100vh !important; }
         :fullscreen #game-container { height: 100vh !important; border: none !important; border-radius: 0 !important; }
         :fullscreen .direct-fullscreen-btn, :fullscreen .controls { display: none !important; }
@@ -96,11 +96,11 @@
 </head>
 <body>
 
-    <!-- Upper-right profile credit note -->
+    <!-- Upper-right profile credit node -->
     <div class="credit-tag">Made by halo4goat</div>
 
-    <!-- Main Header -->
-    <h1 id="page-title">chemistry4fun</h1>
+    <!-- Main Header Rebranded with proper casing -->
+    <h1 id="page-title">Chemistry4Fun</h1>
 
     <button class="btn back-btn" id="back-button" onclick="closeGame()">← Back to Library</button>
 
@@ -110,30 +110,11 @@
             <img src="https://crazygames.com" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
-        <!-- FNAF 1 -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s')">
-            <img src="https://media-amazon.com" alt="FNAF 1">
-            <h3>FNAF 1</h3>
-        </div>
-        <!-- FNAF 2 -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s 2')">
-            <img src="https://media-amazon.com" alt="FNAF 2">
-            <h3>FNAF 2</h3>
-        </div>
-        <!-- FNAF 3 -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s 3')">
-            <img src="https://media-amazon.com" alt="FNAF 3">
-            <h3>FNAF 3</h3>
-        </div>
-        <!-- FNAF 4 -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s 4')">
-            <img src="https://media-amazon.com" alt="FNAF 4">
-            <h3>FNAF 4</h3>
-        </div>
-        <!-- FNAF 5: Sister Location -->
-        <div class="card" onclick="loadGame('https://github.io', 'Five Nights at Freddy\'s: Sister Location')">
-            <img src="https://media-amazon.com" alt="FNAF 5">
-            <h3>FNAF 5: Sister Location</h3>
+        
+        <!-- Orbit Beats Card (Linked to unblocked standalone gameplay application core) -->
+        <div class="card" onclick="loadGame('https://gamedistribution.com', 'Orbit Beats')">
+            <img src="https://gamedistribution.com" alt="Orbit Beats">
+            <h3>Orbit Beats</h3>
         </div>
     </div>
 
@@ -146,6 +127,7 @@
         </div>
     </div>
 
+    <!-- COMPRESSED REACTION ROUTER SCRIPT CORE -->
     <script>
         const grid = document.getElementById('game-grid'), wrapper = document.getElementById('game-wrapper'), frame = document.getElementById('game-frame'), backBtn = document.getElementById('back-button'), titleText = document.getElementById('current-game-title'), mainTitle = document.getElementById('page-title');
         function loadGame(url, name) { grid.style.display = 'none'; mainTitle.style.display = 'none'; wrapper.style.display = 'flex'; backBtn.style.display = 'block'; titleText.textContent = name; frame.src = url; setTimeout(() => { frame.focus(); }, 100); }
