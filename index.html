@@ -39,28 +39,33 @@
 
     <div class="grid" id="game-grid">
         <div class="card" onclick="loadGame('https://math.wales', 'Bloxd.io', 0)">
-            <img src="https://gq.com.tw" alt="Bloxd.io">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%232a2a2a'/><path d='M30,30 H70 V70 H30 Z' fill='%2355aa55'/><path d='M40,40 H60 V60 H40 Z' fill='%2388dd88'/></svg>" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
         
         <div class="card" onclick="loadGame('https://github.io', 'Orbit Beats', 45)">
-            <img src="https://gamedistribution.com" alt="Orbit Beats">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111118'/><circle cx='35' cy='50' r='12' fill='%23ff3344'/><circle cx='65' cy='50' r='12' fill='%233344ff'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23333' stroke-width='2' stroke-dasharray='4'/></svg>" alt="Orbit Beats">
             <h3>Orbit Beats</h3>
         </div>
         
         <div class="card" onclick="loadGame('https://github.io', 'Undead Invasion', 55)">
-            <img src="https://gamedistribution.com" alt="Undead Invasion">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231c1a1a'/><text y='55' x='10' font-size='45' fill='%23ff3333'>🧟</text></svg>" alt="Undead Invasion">
             <h3>Undead Invasion</h3>
         </div>
         
         <div class="card" onclick="loadGame('https://veck.io', 'Veck.io', 0)">
-            <img src="https://gamedistribution.com" alt="Veck.io">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23050510'/><polygon points='50,20 80,75 20,75' fill='none' stroke='%23ffcc00' stroke-width='3'/></svg>" alt="Veck.io">
             <h3>Veck.io</h3>
         </div>
 
-        <div class="card" onclick="loadGame('https://agar-io.io', 'Agar.io', 0)">
-            <img src="https://nocookie.net" alt="Agar.io">
-            <h3>Agar.io</h3>
+        <div class="card" onclick="loadGame('https://github.io', 'Retro Bowl', 0)">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235c3a21'/><path d='M20,50 Q50,20 80,50 Q50,80 20,50 Z' fill='%238B5A2B'/><line x1='30' y1='50' x2='70' y2='50' stroke='white' stroke-width='3'/><line x1='40' y1='43' x2='40' y2='57' stroke='white' stroke-width='2'/><line x1='50' y1='43' x2='50' y2='57' stroke='white' stroke-width='2'/><line x1='60' y1='43' x2='60' y2='57' stroke='white' stroke-width='2'/></svg>" alt="Retro Bowl">
+            <h3>Retro Bowl</h3>
+        </div>
+
+        <div class="card" onclick="loadGame('https://github.io', 'Tunnel Rush', 0)">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><circle cx='50' cy='50' r='40' fill='none' stroke='%23ff00ff' stroke-width='4'/><circle cx='50' cy='50' r='25' fill='none' stroke='%2300ffff' stroke-width='3'/><circle cx='50' cy='50' r='10' fill='none' stroke='%23ffff00' stroke-width='2'/></svg>" alt="Tunnel Rush">
+            <h3>Tunnel Rush</h3>
         </div>
     </div>
 
@@ -77,14 +82,12 @@
 
     <script>
         const grid = document.getElementById('game-grid'), wrapper = document.getElementById('game-wrapper'), frame = document.getElementById('game-frame'), backBtn = document.getElementById('back-button'), titleText = document.getElementById('current-game-title'), mainTitle = document.getElementById('page-title');
-        
         function loadGame(url, name, cropPixels) { 
             grid.style.display = 'none'; 
             mainTitle.style.display = 'none'; 
             wrapper.style.display = 'flex'; 
             backBtn.style.display = 'block'; 
             titleText.textContent = name; 
-            
             if (cropPixels > 0) {
                 frame.style.marginTop = "-" + cropPixels + "px";
                 frame.style.height = "calc(100% + " + cropPixels + "px)";
@@ -92,11 +95,9 @@
                 frame.style.marginTop = "0px";
                 frame.style.height = "100%";
             }
-            
             frame.src = url; 
             setTimeout(() => { frame.focus(); }, 100); 
         }
-        
         function closeGame() { 
             if (document.fullscreenElement) { document.exitFullscreen(); } 
             frame.src = ""; 
@@ -106,7 +107,6 @@
             grid.style.display = 'grid'; 
             mainTitle.style.display = 'block'; 
         }
-        
         function toggleNativeFullscreen() { 
             if (!document.fullscreenElement) { 
                 wrapper.requestFullscreen().catch(err => { alert("Fullscreen blocked: " + err.message); }); 
@@ -114,7 +114,6 @@
                 document.exitFullscreen(); 
             } 
         }
-        
         document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) { frame.focus(); } });
     </script>
 
