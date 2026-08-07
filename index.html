@@ -4,82 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemistry4Fun</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧪</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #0b0b0c; color: white; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; position: relative; }
         .version-tag { position: absolute; top: 20px; left: 20px; font-size: 0.95rem; font-weight: bold; color: #ff3366; letter-spacing: 0.5px; background-color: #16161a; padding: 6px 14px; border-radius: 20px; border: 1px solid #24242b; }
         .credit-tag { position: absolute; top: 20px; right: 20px; font-size: 0.95rem; font-weight: bold; color: #00ffcc; letter-spacing: 0.5px; background-color: #16161a; padding: 6px 14px; border-radius: 20px; border: 1px solid #24242b; }
-        h1 { margin-bottom: 30px; font-weight: 600; letter-spacing: 1px;}
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; width: 100%; max-width: 1200px; margin: 0 auto; }
+        h1 { margin-bottom: 15px; font-weight: 600; letter-spacing: 1px;}
+        .tab-container { display: flex; gap: 10px; margin-bottom: 30px; background-color: #16161a; padding: 6px; border-radius: 8px; border: 1px solid #24242b; }
+        .tab-btn { background: none; border: none; color: #888; padding: 10px 24px; font-size: 1rem; font-weight: bold; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
+        .tab-btn.active { background-color: #00ffcc; color: #121212; }
+        .view-section { display: none; width: 100%; max-width: 1200px; }
+        .view-section.active { display: block; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; width: 100%; margin: 0 auto; }
         .card { background-color: #16161a; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #24242b; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0, 255, 204, 0.25); border-color: #00ffcc; }
         .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; background-color: #010101; }
         .card h3 { margin: 12px 0 3px 0; font-size: 1.05rem; font-weight: 600; color: #f0f0f0; }
+        .auth-box { background-color: #16161a; border-radius: 12px; border: 1px solid #24242b; padding: 30px; max-width: 400px; margin: 40px auto; text-align: center; }
+        .auth-box h2 { margin-top: 0; color: #00ffcc; font-size: 1.5rem; margin-bottom: 20px; }
+        .auth-box input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #24242b; background-color: #0b0b0c; color: white; box-sizing: border-box; font-size: 1rem; }
+        .auth-box input:focus { border-color: #00ffcc; outline: none; }
+        .auth-box .btn-submit { width: 100%; background-color: #00ffcc; color: #121212; border: none; padding: 12px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+        .auth-box .btn-submit:hover { background-color: #00ccaa; }
+        .chat-container { background-color: #16161a; border-radius: 12px; border: 1px solid #24242b; max-width: 800px; margin: 0 auto; height: 60vh; display: flex; flex-direction: column; overflow: hidden; }
+        .chat-header { padding: 15px 20px; background-color: #121214; border-bottom: 1px solid #24242b; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header span { font-weight: bold; color: #00ffcc; }
+        .btn-logout { background-color: #ff3366; color: white; border: none; padding: 6px 14px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+        .btn-logout:hover { background-color: #dd2255; }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .msg { max-width: 70%; padding: 10px 16px; border-radius: 8px; font-size: 0.95rem; line-height: 1.4; word-break: break-word; }
+        .msg.incoming { background-color: #24242b; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg.outgoing { background-color: #00ffcc; color: #121212; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .msg-meta { font-size: 0.75rem; font-weight: bold; margin-bottom: 4px; display: block; opacity: 0.7; }
+        .chat-input-area { display: flex; gap: 10px; padding: 15px 20px; background-color: #121214; border-top: 1px solid #24242b; }
+        .chat-input-area input { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #24242b; background-color: #0b0b0c; color: white; font-size: 1rem; }
+        .chat-input-area input:focus { border-color: #00ffcc; outline: none; }
+        .chat-input-area button { background-color: #00ffcc; color: #121212; border: none; padding: 0 24px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+        .chat-input-area button:hover { background-color: #00ccaa; }
     </style>
 </head>
 <body>
 
-    <div class="version-tag">v2.03</div>
+    <div class="version-tag">v2.07</div>
     <div class="credit-tag">Made by halo4goat</div>
 
     <h1>Chemistry4Fun</h1>
 
-    <div class="grid" id="game-grid">
-        <div class="card" onclick="cloakGame('https://math.wales', 'Bloxd.io')">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%232a2a2a'/><path d='M30,30 H70 V70 H30 Z' fill='%2355aa55'/><path d='M40,40 H60 V60 H40 Z' fill='%2388dd88'/></svg>" alt="Bloxd.io">
-            <h3>Bloxd.io</h3>
-        </div>
+    <div class="tab-container">
+        <button id="games-tab-btn" class="tab-btn active" onclick="switchTab('games')">Games</button>
+        <button id="chat-tab-btn" class="tab-btn" onclick="switchTab('chat')">Chat Portal</button>
+    </div>
 
-        <div class="card" onclick="cloakGame('https://veck.io', 'Veck.io')">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23050510'/><polygon points='50,20 80,75 20,75' fill='none' stroke='%23ffcc00' stroke-width='3'/></svg>" alt="Veck.io">
-            <h3>Veck.io</h3>
+    <div id="games-section" class="view-section active">
+        <div class="grid">
+            <div class="card" onclick="cloakGame('https://math.wales', 'Bloxd.io')">
+                <img src="assets/bloxd-io.png" alt="Bloxd.io">
+                <h3>Bloxd.io</h3>
+            </div>
+            <div class="card" onclick="cloakGame('https://veck.io', 'Veck.io')">
+                <img src="assets/veck-io.jpg" alt="Veck.io">
+                <h3>Veck.io</h3>
+            </div>
+            <div class="card" onclick="cloakGame('./halflife.html', 'Half-Life 1')">
+                <img src="assets/half-life.jpg" alt="Half-Life 1">
+                <h3>Half-Life 1</h3>
+            </div>
+            <div class="card" onclick="cloakGame('https://skribbl.io', 'Skribbl.io')">
+                <img src="assets/skribbl-io.jpg" alt="Skribbl.io">
+                <h3>Skribbl.io</h3>
+            </div>
+            <div class="card" onclick="cloakGame('https://wings.io', 'Wings.io')">
+                <img src="assets/wings-io.jpg" alt="Wings.io">
+                <h3>Wings.io</h3>
+            </div>
+            <div class="card" onclick="cloakGame('https://diep.io', 'Diep.io')">
+                <img src="assets/diep-io.jpg" alt="Diep.io">
+                <h3>Diep.io</h3>
+            </div>
         </div>
+    </div>
 
-        <div class="card" onclick="cloakGame('https://gn-math.dev/?id=262', 'Half-Life 1')">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ff6600'/><text y='65' x='20' font-size='50' font-family='serif' fill='black'>&lambda;</text></svg>" alt="Half-Life 1">
-            <h3>Half-Life 1</h3>
+    <div id="chat-section" class="view-section">
+        <div id="auth-container">
+            <div class="auth-box">
+                <h2>Choose a Username</h2>
+                <input type="text" id="login-username" placeholder="Enter username...">
+                <button class="btn-submit" onclick="handleSetupName()">Enter Chat</button>
+            </div>
         </div>
-
-        <div class="card" onclick="cloakGame('https://skribbl.io', 'Skribbl.io')">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%233a5fcd'/><path d='M30,70 L70,30 L80,40 L40,80 Z' fill='%23ffcc00'/><path d='M70,30 L80,20 L90,30 L80,40 Z' fill='%23ff3333'/></svg>" alt="Skribbl.io">
-            <h3>Skribbl.io</h3>
-        </div>
-
-        <div class="card" onclick="cloakGame('https://wings.io', 'Wings.io')">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2387ceeb'/><polygon points='20,40 50,20 80,40 50,50' fill='%23fff'/><polygon points='35,45 50,75 65,45' fill='%23ff3333'/></svg>" alt="Wings.io">
-            <h3>Wings.io</h3>
-        </div>
-
-        <div class="card" onclick="cloakGame('https://diep.io', 'Diep.io')">
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23b0c4de'/><circle cx='50' cy='50' r='20' fill='%2300bfff'/><rect x='42' y='15' width='16' height='20' fill='%23777'/></svg>" alt="Diep.io">
-            <h3>Diep.io</h3>
+        <div id="active-chat-box" class="chat-container" style="display: none;">
+            <div class="chat-header">
+                <div>Logged in as: <span id="chat-user-display"></span></div>
+                <button class="btn-logout" onclick="handleLogout()">Change Name</button>
+            </div>
+            <div class="chat-messages" id="chat-msg-wall">
+                <div class="msg incoming"><span class="msg-meta">System</span>Welcome to the Chemistry4Fun Lobby. Local session mapping active.</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-message-input" placeholder="Type a message..." onkeypress="handleChatKey(event)">
+                <button onclick="sendChatMessage()">Send</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function cloakGame(url, title) {
-            let popup = window.open('about:blank', '_blank');
-            if (!popup) {
-                alert("Please allow popups for this site so the game can launch unblocked!");
+        let currentActiveUser = localStorage.getItem('c4f_logged_user') || null;
+
+        function switchTab(t) {
+            document.getElementById('games-tab-btn').classList.remove('active');
+            document.getElementById('chat-tab-btn').classList.remove('active');
+            document.getElementById('games-section').classList.remove('active');
+            document.getElementById('chat-section').classList.remove('active');
+
+            if (t === 'games') {
+                document.getElementById('games-tab-btn').classList.add('active');
+                document.getElementById('games-section').classList.add('active');
+            } else {
+                document.getElementById('chat-tab-btn').classList.add('active');
+                document.getElementById('chat-section').classList.add('active');
+                checkAuthStatus();
+            }
+        }
+
+        function checkAuthStatus() {
+            if (currentActiveUser) {
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('active-chat-box').style.display = 'flex';
+                document.getElementById('chat-user-display').textContent = currentActiveUser;
+            } else {
+                document.getElementById('auth-container').style.display = 'block';
+                document.getElementById('active-chat-box').style.display = 'none';
+            }
+        }
+
+        function handleSetupName() {
+            let u = document.getElementById('login-username').value.trim();
+
+            if (!u) {
+                alert('Please enter a nickname.');
                 return;
             }
 
-            let doc = popup.document;
-            doc.title = "Chemistry Experiment - " + title;
-            
-            doc.write(`
-                <html style="margin:0;padding:0;overflow:hidden;background:#000;height:100%;">
-                <head>
-                    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧪</text></svg>">
-                </head>
-                <body style="margin:0;padding:0;height:100%;width:100%;">
-                    <iframe src="${url}" style="border:none;width:100%;height:100%;margin:0;padding:0;" allow="autoplay; keyboard-map *; gamepad *; keyboard *; mouse *; fullscreen *; local-storage *; session-storage *"></iframe>
-                </body>
-                </html>
-            `);
-            doc.close();
-        }
-    </script>
+            let userId = localStorage.getItem('c4f_id_' + u);
 
+            if (!userId) {
+                userId = '#' + Math.floor(1000 + Math.random() * 9000);
+                localStorage.setItem('c4f_id_' + u, userId);
+            }
+
+            let fullUserTag = u + userId;
+            currentActiveUser = fullUserTag;
+            localStorage.setItem('c4f_logged_user', fullUserTag);
+            checkAuthStatus();
+            document.getElementById('login-username').value = '';
+        }
+
+        function handleLogout() {
+            currentActiveUser = null;
+            localStorage.removeItem('c4f_logged_user');
+            checkAuthStatus();
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function appendChatMessage(direction, author, text) {
+            let wall = document.getElementById('chat-msg-wall');
+            let message = document.createElement('div');
+            let meta = document.createElement('span');
+
+            message.className = 'msg ' + direction;
+            meta.className = 'msg-meta';
+            meta.textContent = author;
+
+            message.appendChild(meta);
+            message.appendChild(document.createTextNode(text));
+            wall.appendChild(message);
+            wall.scrollTop = wall.scrollHeight;
+        }
+
+        function sendChatMessage() {
+            let input = document.getElementById('chat-message-input');
+            let text = input.value.trim();
+
+            if (!text || !currentActiveUser) {
+                return;
+            }
+
+            appendChatMessage('outgoing', currentActiveUser, text);
+            input.value = '';
+
+            setTimeout(function () {
+                appendChatMessage('incoming', 'Lab-Assistant', 'Message logged locally.');
+            }, 800);
+        }
+
+        function cloakGame(url, title) {
+            let popup = window.open('about:blank', '_blank');
+
+            if (!popup) {
+                alert('Please allow popups!');
+                return;
+            }
+
+            let iframeUrl = url;
+
+            try {
+                iframeUrl = new URL(url, window.location.href).href;
+            } catch (error) {
+                iframeUrl = url;
+            }
+
+            popup.document.open();
+            popup.document.write('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>New Tab</title><style>html,body{margin:0;padding:0;overflow:hidden;background:#000;height:100%;width:100%;}iframe{border:none;width:100%;height:100%;display:block;}</style></head><body></body></html>');
+            popup.document.close();
+
+            let iframe = popup.document.createElement('iframe');
+            iframe.src = iframeUrl;
+            iframe.allow = 'autoplay; fullscreen; gamepad';
+            iframe.setAttribute('allowfullscreen', '');
+            popup.document.body.appendChild(iframe);
+
+            popup.document.title = 'Chemistry Experiment - ' + title;
+
+            let link = popup.document.createElement('link');
+            link.rel = 'icon';
+            link.type = 'image/svg+xml';
+            link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E";
+            popup.document.head.appendChild(link);
+        }
+
+        checkAuthStatus();
+    </script>
 </body>
 </html>
