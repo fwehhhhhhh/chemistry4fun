@@ -39,28 +39,28 @@
             <img src="https://crazygames.com" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
-        <!-- FNAF 1 -->
-        <div class="card" onclick="loadGame('https://jsdelivr.net', 'Five Nights at Freddy\'s')">
+        <!-- FNAF 1 (Routed via raw unblocked cloud application port) -->
+        <div class="card" onclick="loadGame('https://hwcdn.net', 'Five Nights at Freddy\'s')">
             <img src="https://media-amazon.com" alt="FNAF 1">
             <h3>FNAF 1</h3>
         </div>
         <!-- FNAF 2 -->
-        <div class="card" onclick="loadGame('https://jsdelivr.net', 'Five Nights at Freddy\'s 2')">
+        <div class="card" onclick="loadGame('https://hwcdn.net', 'Five Nights at Freddy\'s 2')">
             <img src="https://media-amazon.com" alt="FNAF 2">
             <h3>FNAF 2</h3>
         </div>
         <!-- FNAF 3 -->
-        <div class="card" onclick="loadGame('https://jsdelivr.net', 'Five Nights at Freddy\'s 3')">
+        <div class="card" onclick="loadGame('https://hwcdn.net', 'Five Nights at Freddy\'s 3')">
             <img src="https://media-amazon.com" alt="FNAF 3">
             <h3>FNAF 3</h3>
         </div>
         <!-- FNAF 4 -->
-        <div class="card" onclick="loadGame('https://jsdelivr.net', 'Five Nights at Freddy\'s 4')">
+        <div class="card" onclick="loadGame('https://hwcdn.net', 'Five Nights at Freddy\'s 4')">
             <img src="https://media-amazon.com" alt="FNAF 4">
             <h3>FNAF 4</h3>
         </div>
         <!-- FNAF 5: Sister Location -->
-        <div class="card" onclick="loadGame('https://jsdelivr.net', 'Five Nights at Freddy\'s: Sister Location')">
+        <div class="card" onclick="loadGame('https://hwcdn.net', 'Five Nights at Freddy\'s: Sister Location')">
             <img src="https://media-amazon.com" alt="FNAF 5">
             <h3>FNAF 5: Sister Location</h3>
         </div>
@@ -81,7 +81,7 @@
         function closeGame() { if (document.fullscreenElement) { document.exitFullscreen(); } frame.src = ""; wrapper.style.display = 'none'; backBtn.style.display = 'none'; grid.style.width = '100%'; grid.style.display = 'grid'; mainTitle.style.display = 'block'; }
         function toggleNativeFullscreen() { if (!document.fullscreenElement) { wrapper.requestFullscreen().catch(err => { alert("Fullscreen blocked: " + err.message); }); } else { document.exitFullscreen(); } }
         document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) { frame.focus(); } });
-    </script>
+    </style>
 
 </body>
 </html>
