@@ -15,19 +15,6 @@
         .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0, 255, 204, 0.25); border-color: #00ffcc; }
         .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; background-color: #010101; }
         .card h3 { margin: 12px 0 3px 0; font-size: 1.05rem; font-weight: 600; color: #f0f0f0; }
-        #game-wrapper { display: none; width: 95vw; max-width: 1300px; flex-direction: column; }
-        #game-container { width: 100%; height: 72vh; background-color: #000; border-radius: 12px 12px 0 0; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 1px solid #333; border-bottom: none; }
-        #game-frame { width: 100%; height: 100%; border: none; }
-        .controls { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px 20px; background-color: #121214; box-sizing: border-box; border: 1px solid #333; border-top: none; border-radius: 0 0 12px 12px; }
-        .btn { background-color: #00ffcc; color: #121212; border: none; padding: 10px 24px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
-        .btn:hover { background-color: #00ccaa; }
-        .back-btn { background-color: #2a2a30; color: white; margin-bottom: 20px; display: none; }
-        .back-btn:hover { background-color: #3f3f46; }
-        .direct-fullscreen-btn { width: 100%; padding: 16px; font-size: 1.1rem; background-color: #ff3366; color: white; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1.5px; border-left: 1px solid #333; border-right: 1px solid #333; box-sizing: border-box; transition: background 0.2s; }
-        .direct-fullscreen-btn:hover { background-color: #dd2255; }
-        :fullscreen #game-wrapper { width: 100vw !important; max-width: 100vw !important; height: 100vh !important; }
-        :fullscreen #game-container { height: 100vh !important; border: none !important; border-radius: 0 !important; }
-        :fullscreen .direct-fullscreen-btn, :fullscreen .controls { display: none !important; }
     </style>
 </head>
 <body>
@@ -35,55 +22,42 @@
     <div class="version-tag" id="v-counter">v0.01</div>
     <div class="credit-tag">Made by halo4goat</div>
 
-    <h1 id="page-title">Chemistry4Fun</h1>
-
-    <button class="btn back-btn" id="back-button" onclick="closeGame()">&larr; Back to Library</button>
+    <h1>Chemistry4Fun</h1>
 
     <div class="grid" id="game-grid">
-        <div class="card" onclick="loadGame('https://math.wales', 'Bloxd.io', 0)">
+        <div class="card" onclick="cloakGame('https://math.wales', 'Bloxd.io')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%232a2a2a'/><path d='M30,30 H70 V70 H30 Z' fill='%2355aa55'/><path d='M40,40 H60 V60 H40 Z' fill='%2388dd88'/></svg>" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
         
-        <div class="card" onclick="loadGame('./orbitbeats.html', 'Orbit Beats', 45)">
+        <div class="card" onclick="cloakGame('https://jsdelivr.net', 'Orbit Beats')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111118'/><circle cx='35' cy='50' r='12' fill='%23ff3344'/><circle cx='65' cy='50' r='12' fill='%233344ff'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23333' stroke-width='2' stroke-dasharray='4'/></svg>" alt="Orbit Beats">
             <h3>Orbit Beats</h3>
         </div>
         
-        <div class="card" onclick="loadGame('./undeadinvasion.html', 'Undead Invasion', 55)">
+        <div class="card" onclick="cloakGame('https://jsdelivr.net', 'Undead Invasion')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231c1a1a'/><text y='55' x='10' font-size='45' fill='%23ff3333'>痕</text></svg>" alt="Undead Invasion">
             <h3>Undead Invasion</h3>
         </div>
         
-        <div class="card" onclick="loadGame('https://veck.io', 'Veck.io', 0)">
+        <div class="card" onclick="cloakGame('https://veck.io', 'Veck.io')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23050510'/><polygon points='50,20 80,75 20,75' fill='none' stroke='%23ffcc00' stroke-width='3'/></svg>" alt="Veck.io">
             <h3>Veck.io</h3>
         </div>
 
-        <div class="card" onclick="loadGame('./retrobowl.html', 'Retro Bowl', 0)">
+        <div class="card" onclick="cloakGame('https://jsdelivr.net', 'Retro Bowl')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%235c3a21'/><path d='M20,50 Q50,20 80,50 Q50,80 20,50 Z' fill='%238B5A2B'/><line x1='30' y1='50' x2='70' y2='50' stroke='white' stroke-width='3'/><line x1='40' y1='43' x2='40' y2='57' stroke='white' stroke-width='2'/><line x1='50' y1='43' x2='50' y2='57' stroke='white' stroke-width='2'/><line x1='60' y1='43' x2='60' y2='57' stroke='white' stroke-width='2'/></svg>" alt="Retro Bowl">
             <h3>Retro Bowl</h3>
         </div>
 
-        <div class="card" onclick="loadGame('./tunnelrush.html', 'Tunnel Rush', 0)">
+        <div class="card" onclick="cloakGame('https://jsdelivr.net', 'Tunnel Rush')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><circle cx='50' cy='50' r='40' fill='none' stroke='%23ff00ff' stroke-width='4'/><circle cx='50' cy='50' r='25' fill='none' stroke='%2300ffff' stroke-width='3'/><circle cx='50' cy='50' r='10' fill='none' stroke='%23ffff00' stroke-width='2'/></svg>" alt="Tunnel Rush">
             <h3>Tunnel Rush</h3>
         </div>
     </div>
 
-    <div id="game-wrapper">
-        <div id="game-container">
-            <iframe id="game-frame" src="" allow="autoplay; keyboard-map *; gamepad *; keyboard *; mouse *; fullscreen *; local-storage *; session-storage *" scrolling="no"></iframe>
-        </div>
-        <button class="direct-fullscreen-btn" onclick="toggleNativeFullscreen()">⚡ ACTIVATE FULLSCREEN MODE ⚡</button>
-        <div class="controls">
-            <span id="current-game-title" style="font-weight: bold; color: #00ffcc;">Game Loading...</span>
-            <button class="btn" onclick="toggleNativeFullscreen()">🗖 Go Fullscreen</button>
-        </div>
-    </div>
-
     <script>
-        const grid = document.getElementById('game-grid'), wrapper = document.getElementById('game-wrapper'), frame = document.getElementById('game-frame'), backBtn = document.getElementById('back-button'), titleText = document.getElementById('current-game-title'), mainTitle = document.getElementById('page-title'), vCounter = document.getElementById('v-counter');
+        const vCounter = document.getElementById('v-counter');
         
         let saveKey = "chem4fun_v_tracker";
         let currentVer = parseFloat(localStorage.getItem(saveKey)) || 0.01;
@@ -95,39 +69,32 @@
         }
         vCounter.textContent = "v" + currentVer;
 
-        function loadGame(url, name, cropPixels) { 
-            grid.style.display = 'none'; 
-            mainTitle.style.display = 'none'; 
-            wrapper.style.display = 'flex'; 
-            backBtn.style.display = 'block'; 
-            titleText.textContent = name; 
-            if (cropPixels > 0) {
-                frame.style.marginTop = "-" + cropPixels + "px";
-                frame.style.height = "calc(100% + " + cropPixels + "px)";
-            } else {
-                frame.style.marginTop = "0px";
-                frame.style.height = "100%";
+        // ADVANCED CLOAKING LOBBY ENGINE
+        function cloakGame(url, title) {
+            // Step 1: Open an empty page tab that school filters can't read
+            let popup = window.open('about:blank', '_blank');
+            if (!popup) {
+                alert("Please allow popups for this site so the game can launch unblocked!");
+                return;
             }
-            frame.src = url; 
-            setTimeout(() => { frame.focus(); }, 100); 
+
+            // Step 2: Inject the custom title, chemistry tab icons, and a secure container
+            let doc = popup.document;
+            doc.title = title + " - Chemistry4Fun";
+            
+            // Step 3: Write a clean document frame package using your exact requested permissions
+            doc.write(`
+                <html style="margin:0;padding:0;overflow:hidden;background:#000;height:100%;">
+                <head>
+                    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧪</text></svg>">
+                </head>
+                <body style="margin:0;padding:0;height:100%;width:100%;">
+                    <iframe src="${url}" style="border:none;width:100%;height:100%;margin:0;padding:0;" allow="autoplay; keyboard-map *; gamepad *; keyboard *; mouse *; fullscreen *; local-storage *; session-storage *"></iframe>
+                </body>
+                </html>
+            `);
+            doc.close();
         }
-        function closeGame() { 
-            if (document.fullscreenElement) { document.exitFullscreen(); } 
-            frame.src = ""; 
-            wrapper.style.display = 'none'; 
-            backBtn.style.display = 'none'; 
-            grid.style.width = '100%'; 
-            grid.style.display = 'grid'; 
-            mainTitle.style.display = 'block'; 
-        }
-        function toggleNativeFullscreen() { 
-            if (!document.fullscreenElement) { 
-                wrapper.requestFullscreen().catch(err => { alert("Fullscreen blocked: " + err.message); }); 
-            } else { 
-                document.exitFullscreen(); 
-            } 
-        }
-        document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) { frame.focus(); } });
     </script>
 
 </body>
