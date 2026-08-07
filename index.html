@@ -19,7 +19,8 @@
 </head>
 <body>
 
-    <div class="version-tag" id="v-counter">v0.01</div>
+    <!-- LOCKED VERSION TAG: Change this number manually in GitHub when you update your code! -->
+    <div class="version-tag">v0.01</div>
     <div class="credit-tag">Made by halo4goat</div>
 
     <h1>Chemistry4Fun</h1>
@@ -30,12 +31,12 @@
             <h3>Bloxd.io</h3>
         </div>
         
-        <div class="card" onclick="cloakGame('https://jsdelivr.net', 'Orbit Beats')">
+        <div class="card" onclick="cloakGame('https://gamedistribution.com', 'Orbit Beats')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111118'/><circle cx='35' cy='50' r='12' fill='%23ff3344'/><circle cx='65' cy='50' r='12' fill='%233344ff'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23333' stroke-width='2' stroke-dasharray='4'/></svg>" alt="Orbit Beats">
             <h3>Orbit Beats</h3>
         </div>
         
-        <div class="card" onclick="cloakGame('https://jsdelivr.net', 'Undead Invasion')">
+        <div class="card" onclick="cloakGame('https://gamedistribution.com', 'Undead Invasion')">
             <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231c1a1a'/><text y='55' x='10' font-size='45' fill='%23ff3333'>痕</text></svg>" alt="Undead Invasion">
             <h3>Undead Invasion</h3>
         </div>
@@ -57,32 +58,16 @@
     </div>
 
     <script>
-        const vCounter = document.getElementById('v-counter');
-        
-        let saveKey = "chem4fun_v_tracker";
-        let currentVer = parseFloat(localStorage.getItem(saveKey)) || 0.01;
-        
-        if (!sessionStorage.getItem('ver_incremented')) {
-            currentVer = (currentVer + 0.01).toFixed(2);
-            localStorage.setItem(saveKey, currentVer);
-            sessionStorage.setItem('ver_incremented', 'true');
-        }
-        vCounter.textContent = "v" + currentVer;
-
-        // ADVANCED CLOAKING LOBBY ENGINE
         function cloakGame(url, title) {
-            // Step 1: Open an empty page tab that school filters can't read
             let popup = window.open('about:blank', '_blank');
             if (!popup) {
                 alert("Please allow popups for this site so the game can launch unblocked!");
                 return;
             }
 
-            // Step 2: Inject the custom title, chemistry tab icons, and a secure container
             let doc = popup.document;
-            doc.title = title + " - Chemistry4Fun";
+            doc.title = "Chemistry Experiment - " + title;
             
-            // Step 3: Write a clean document frame package using your exact requested permissions
             doc.write(`
                 <html style="margin:0;padding:0;overflow:hidden;background:#000;height:100%;">
                 <head>
