@@ -112,12 +112,12 @@
         </div>
         
         <!-- Orbit Beats Card -->
-        <div class="card" onclick="loadGame('https://github.io', 'Orbit Beats')">
+        <div class="card" onclick="loadGame('https://undeadcorridor.github.io/orbit-beats', 'Orbit Beats')">
             <img src="https://gamedistribution.com" alt="Orbit Beats">
             <h3>Orbit Beats</h3>
         </div>
 
-        <!-- NEW: Undead Invasion Card -->
+        <!-- Undead Invasion Card -->
         <div class="card" onclick="loadGame('https://undeadinvasion.github.io/', 'Undead Invasion')">
             <img src="https://unsplash.com" alt="Undead Invasion">
             <h3>Undead Invasion</h3>
@@ -125,7 +125,10 @@
     </div>
 
     <div id="game-wrapper">
-        <div id="game-container"><iframe id="game-frame" src="" allow="gamepad *; keyboard *; mouse *; fullscreen *" scrolling="no"></iframe></div>
+        <div id="game-container">
+            <!-- This iframe updates dynamically and implements your exact requested allow rules -->
+            <iframe id="game-frame" src="" allow="autoplay; keyboard-map *; gamepad *; keyboard *; mouse *; fullscreen *; local-storage *; session-storage *" scrolling="no"></iframe>
+        </div>
         <button class="direct-fullscreen-btn" onclick="toggleNativeFullscreen()">⚡ ACTIVATE FULLSCREEN MODE ⚡</button>
         <div class="controls">
             <span id="current-game-title" style="font-weight: bold; color: #00ffcc;">Game Loading...</span>
