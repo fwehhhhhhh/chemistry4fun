@@ -15,7 +15,7 @@
         .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; background-color: #010101; }
         .card h3 { margin: 12px 0 3px 0; font-size: 1.05rem; font-weight: 600; color: #f0f0f0; }
         #game-wrapper { display: none; width: 95vw; max-width: 1300px; flex-direction: column; }
-        #game-container { width: 100%; height: 72vh; background-color: #000; border-radius: 12px 12px 0 0; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 1px solid #333; border-bottom: none; }
+        #game-container { width: 100%; height: 78vh; background-color: #000; border-radius: 12px 12px 0 0; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.7); border: 1px solid #333; }
         #game-frame { width: 100%; height: 100%; border: none; }
         .controls { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px 20px; background-color: #121214; box-sizing: border-box; border: 1px solid #333; border-top: none; border-radius: 0 0 12px 12px; }
         .btn { background-color: #00ffcc; color: #121212; border: none; padding: 10px 24px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
@@ -27,7 +27,6 @@
         :fullscreen #game-wrapper { width: 100vw !important; max-width: 100vw !important; height: 100vh !important; }
         :fullscreen #game-container { height: 100vh !important; border: none !important; border-radius: 0 !important; }
         :fullscreen .direct-fullscreen-btn, :fullscreen .controls { display: none !important; }
-        :fullscreen #game-frame { height: calc(100% + 55px) !important; margin-top: -55px !important; }
     </style>
 </head>
 <body>
@@ -39,16 +38,21 @@
     <button class="btn back-btn" id="back-button" onclick="closeGame()">&larr; Back to Library</button>
 
     <div class="grid" id="game-grid">
-        <div class="card" onclick="loadGame('https://math.wales', 'Bloxd.io', false)">
-            <img src="https://crazygames.com" alt="Bloxd.io">
+        <!-- Bloxd.io Card (Embedded SVG Artwork Cover) -->
+        <div class="card" onclick="loadGame('https://math.wales', 'Bloxd.io')">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%232a2a2a'/><path d='M30,30 H70 V70 H30 Z' fill='%2355aa55'/><path d='M40,40 H60 V60 H40 Z' fill='%2388dd88'/></svg>" alt="Bloxd.io">
             <h3>Bloxd.io</h3>
         </div>
-        <div class="card" onclick="loadGame('https://github.io', 'Orbit Beats', true)">
-            <img src="https://gamedistribution.com" alt="Orbit Beats">
+        
+        <!-- Orbit Beats Card (Embedded SVG Artwork Cover) -->
+        <div class="card" onclick="loadGame('https://github.io', 'Orbit Beats')">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111118'/><circle cx='35' cy='50' r='12' fill='%23ff3344'/><circle cx='65' cy='50' r='12' fill='%233344ff'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23333' stroke-width='2' stroke-dasharray='4'/></svg>" alt="Orbit Beats">
             <h3>Orbit Beats</h3>
         </div>
-        <div class="card" onclick="loadGame('https://github.io', 'Undead Invasion', true)">
-            <img src="https://unsplash.com" alt="Undead Invasion">
+
+        <!-- Undead Invasion Card (Embedded SVG Artwork Cover) -->
+        <div class="card" onclick="loadGame('https://github.io', 'Undead Invasion')">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231c1a1a'/><text y='55' x='10' font-size='45' fill='%23ff3333'>🧟</text></svg>" alt="Undead Invasion">
             <h3>Undead Invasion</h3>
         </div>
     </div>
@@ -66,19 +70,12 @@
 
     <script>
         const grid = document.getElementById('game-grid'), wrapper = document.getElementById('game-wrapper'), frame = document.getElementById('game-frame'), backBtn = document.getElementById('back-button'), titleText = document.getElementById('current-game-title'), mainTitle = document.getElementById('page-title');
-        function loadGame(url, name, needsCrop) { 
+        function loadGame(url, name) { 
             grid.style.display = 'none'; 
             mainTitle.style.display = 'none'; 
             wrapper.style.display = 'flex'; 
             backBtn.style.display = 'block'; 
             titleText.textContent = name; 
-            if (needsCrop) {
-                frame.style.marginTop = "-55px";
-                frame.style.height = "calc(100% + 55px)";
-            } else {
-                frame.style.marginTop = "0px";
-                frame.style.height = "100%";
-            }
             frame.src = url; 
             setTimeout(() => { frame.focus(); }, 100); 
         }
