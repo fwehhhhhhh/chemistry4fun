@@ -90,29 +90,6 @@
         </div>
     </div>
 
-    <div id="chat-section" class="view-section">
-        <div id="auth-container">
-            <div class="auth-box">
-                <h2>Choose a Username</h2>
-                <input type="text" id="login-username" placeholder="Enter username...">
-                <button class="btn-submit" onclick="handleSetupName()">Enter Chat</button>
-            </div>
-        </div>
-        <div id="active-chat-box" class="chat-container" style="display: none;">
-            <div class="chat-header">
-                <div>Logged in as: <span id="chat-user-display"></span></div>
-                <button class="btn-logout" onclick="handleLogout()">Change Name</button>
-            </div>
-            <div class="chat-messages" id="chat-msg-wall">
-                <div class="msg incoming"><span class="msg-meta">System</span>Welcome to the Chemistry4Fun Lobby. Local session mapping active.</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chat-message-input" placeholder="Type a message..." onkeypress="handleChatKey(event)">
-                <button onclick="sendChatMessage()">Send</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         const CHAT_USERS_KEY = 'c4f_chat_users_v1';
         const ACTIVE_USER_KEY = 'c4f_active_chat_user_v1';
@@ -313,7 +290,15 @@
             setTimeout(function () {
                 appendChatMessage('incoming', 'Lab-Assistant', 'Message logged locally.', false);
             }, 800);
-        }
+        }iv id="chat-section" class="view-section">
+        <div id="auth-container">
+            <div class="auth-box">
+                <h2>Choose a Username</h2>
+                <input type="text" id="login-username" placeholder="Enter username...">
+                <button class="btn-submit" onclick="handleSetupName()">Enter Chat</button>
+            </div>
+        </div>
+        <div id="active-chat-box" cl
 
         function cloakGame(url, title, openFullscreen) {
             let popup = window.open('about:blank', '_blank');
